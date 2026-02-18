@@ -1,0 +1,27 @@
+// This is your Prisma schema file.
+// It tells Prisma what your database tables look like.
+// After changing this file, run: npx prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Each "model" becomes a table in your database.
+// Think of it like a spreadsheet — each model is a sheet,
+// and each field is a column.
+
+model Idea {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  category  String   @default("general")
+  emoji     String   @default("💡")
+  pinned    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
